@@ -41,7 +41,10 @@ public class Game {
                 default:
                     break;
             }
-           if (last4moves.size() == 4 && last4moves.containsAll(Arrays.asList('w', 'a', 's', 'd'))){
+           if (board.hasWon()){
+               input = 'q';
+               System.out.println("Congratulations! You have won!");
+           } else if (last4moves.size() == 4 && last4moves.containsAll(Arrays.asList('w', 'a', 's', 'd'))){
                input = 'q';
                System.out.println("Game over!");
            } else {

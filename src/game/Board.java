@@ -219,6 +219,9 @@ public class Board {
     public boolean hasFreePositions() {
         return freePositions.size()>0;
     }
+    public boolean hasWon(){
+        return biggest == 2048;
+    }
 
     public void print(){
         StringBuilder stringBuilder = new StringBuilder();
@@ -234,6 +237,5 @@ public class Board {
             stringBuilder.append("\n");
         }
         System.out.print(stringBuilder);
-        System.out.println("biggest = " + biggest);
     }
 }
