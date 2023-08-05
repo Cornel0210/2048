@@ -11,8 +11,29 @@ public class Input {
     }
 
     public char getInput(){
+        char input;
         while (scanner.hasNextLine()){
-            return scanner.nextLine().toLowerCase().charAt(0);
+            try {
+                input = scanner.nextLine().toLowerCase().charAt(0);
+                if (input == 'q' || input == 'w' || input == 'a' || input == 's' || input == 'd'){
+                    return input;
+                } else {
+                    System.out.println("Insert: \n" +
+                            "\t-'q' to quit\n" +
+                            "\t-'w' to collect everything up side\n" +
+                            "\t-'a' to collect everything to the left side\n" +
+                            "\t-'s' to collect everything down side\n" +
+                            "\t-'d' to collect everything to the right side\n");
+                }
+            } catch (StringIndexOutOfBoundsException e){
+                System.out.println("Insert: \n" +
+                        "\t-'q' to quit\n" +
+                        "\t-'w' to collect everything up side\n" +
+                        "\t-'a' to collect everything to the left side\n" +
+                        "\t-'s' to collect everything down side\n" +
+                        "\t-'d' to collect everything to the right side\n");
+            }
+
         }
         return 'q';
     }

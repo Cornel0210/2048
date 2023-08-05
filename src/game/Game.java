@@ -14,6 +14,12 @@ public class Game {
     }
 
     public void run(){
+        System.out.println("Insert: \n" +
+                "\t-'q' to quit\n" +
+                "\t-'w' to collect everything up side\n" +
+                "\t-'a' to collect everything to the left side\n" +
+                "\t-'s' to collect everything down side\n" +
+                "\t-'d' to collect everything to the right side\n");
         board.print();
         char input = Input.getInstance().getInput();
         while (input!='q') {
