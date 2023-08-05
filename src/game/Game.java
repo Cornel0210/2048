@@ -1,9 +1,7 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Game {
     private final Board board;
@@ -13,6 +11,14 @@ public class Game {
         last4moves = new LinkedList<>();
     }
 
+    /**
+     * This method is used to run the game, choosing the actions that have to be performed according to player`s choice.
+     * If there are no available positions, it automatically updates 'last4Moves' list with directions chosen by the player.
+     * In case that all directions were tried and no sum of existing numbers on the board can be made, the game will
+     * end automatically. Also, the game can be stopped by the player by pressing the q+ENTER buttons.
+     * Furthermore, the method automatically checks if the player has won (the highest value on the board is 2048),
+     * stopping the game too.
+     */
     public void run(){
         System.out.println("Insert: \n" +
                 "\t-'q' to quit\n" +
