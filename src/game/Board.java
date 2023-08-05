@@ -224,18 +224,23 @@ public class Board {
     }
 
     public void print(){
-        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (board[i][j] > 0) {
-                    stringBuilder.append(board[i][j]).append(" | ");
+                    if (j == board.length-1){
+                        System.out.printf("%4s", board[i][j]);
+                    } else {
+                        System.out.printf("%4s|", board[i][j]);
+                    }
                 } else {
-                    stringBuilder.append("  | ");
+                    if (j == board.length-1){
+                        System.out.printf("%4s", " ");
+                    } else {
+                        System.out.printf("%4s|", " ");
+                    }
                 }
             }
-            stringBuilder.replace(stringBuilder.length()-3, stringBuilder.length(), "");
-            stringBuilder.append("\n");
+            System.out.println();
         }
-        System.out.print(stringBuilder);
     }
 }
