@@ -216,6 +216,9 @@ public class Board {
         }
     }
 
+    public boolean hasFreePositions() {
+        return freePositions.size()>0;
+    }
 
     public void print(){
         StringBuilder stringBuilder = new StringBuilder();
