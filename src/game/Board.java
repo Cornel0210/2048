@@ -8,10 +8,14 @@ public class Board {
     private final int[][] board;
     private static Random random = new Random();
     private final List<Position> freePositions;
+    private int biggest;
     public Board() {
         freePositions = new ArrayList<>();
         board = new int[4][4];
+        biggest = 0;
         load();
+        getInt();
+        getInt();
     }
 
     private void load(){
@@ -39,7 +43,8 @@ public class Board {
         return true;
     }
 
-    private void process(String direction){
+    public void process(String direction){
+        boolean flag = false;
         switch (direction.trim().toLowerCase()){
             case "up":
                 for (int j = 0; j < board.length; j++) {
@@ -49,10 +54,12 @@ public class Board {
                         while (k < board.length-1 && board[k][j] == 0) {
                             k++;
                         }
-                        if (board[k][j] == board[tmp][j]) {
+                        if (board[k][j] != 0 && board[k][j] == board[tmp][j]) {
                             board[tmp][j] *= 2;
                             board[k][j] = 0;
                             freePositions.add(new Position(k, j));
+                            updateBiggest(board[tmp][j]);
+                            flag = true;
                         }
                         tmp = k;
                         k = tmp+1;
@@ -71,6 +78,7 @@ public class Board {
                                 board[k][j] = 0;
                                 freePositions.remove(new Position(tmp-1, j));
                                 freePositions.add(new Position(k, j));
+                                flag = true;
                             }
                         }
                         tmp++;
@@ -86,10 +94,12 @@ public class Board {
                         while (k > 0 && board[k][j] == 0) {
                             k--;
                         }
-                        if (board[k][j] == board[tmp][j]) {
+                        if (board[k][j] != 0 && board[k][j] == board[tmp][j]) {
                             board[tmp][j] *= 2;
                             board[k][j] = 0;
                             freePositions.add(new Position(k, j));
+                            updateBiggest(board[tmp][j]);
+                            flag = true;
                         }
                         tmp = k;
                         k = tmp-1;
@@ -106,6 +116,7 @@ public class Board {
                                 board[k][j] = 0;
                                 freePositions.remove(new Position(tmp+1, j));
                                 freePositions.add(new Position(k, j));
+                                flag = true;
                             }
                         }
                         tmp--;
@@ -121,10 +132,12 @@ public class Board {
                         while (k < board.length-1 && board[i][k] == 0) {
                             k++;
                         }
-                        if (board[i][k] == board[i][tmp]) {
+                        if (board[i][k] != 0 && board[i][k] == board[i][tmp]) {
                             board[i][tmp] *= 2;
                             board[i][k] = 0;
                             freePositions.add(new Position(i, k));
+                            updateBiggest(board[i][tmp]);
+                            flag = true;
                         }
                         tmp = k;
                         k = tmp+1;
@@ -143,6 +156,7 @@ public class Board {
                                 board[i][k] = 0;
                                 freePositions.remove(new Position(i, tmp-1));
                                 freePositions.add(new Position(i, k));
+                                flag = true;
                             }
                         }
                         tmp++;
@@ -158,10 +172,12 @@ public class Board {
                         while (k > 0 && board[i][k] == 0) {
                             k--;
                         }
-                        if (board[i][k] == board[i][tmp]) {
+                        if (board[i][k] != 0 && board[i][k] == board[i][tmp]) {
                             board[i][tmp] *= 2;
                             board[i][k] = 0;
                             freePositions.add(new Position(i, k));
+                            updateBiggest(board[i][tmp]);
+                            flag = true;
                         }
                         tmp = k;
                         k = tmp-1;
@@ -178,6 +194,7 @@ public class Board {
                                 board[i][k] = 0;
                                 freePositions.remove(new Position(i, tmp+1));
                                 freePositions.add(new Position(i, k));
+                                flag = true;
                             }
                         }
                         tmp--;
@@ -185,6 +202,17 @@ public class Board {
                     }
                 }
                 break;
+        }
+        if (flag){
+            getInt();
+            print();
+        } else {
+            System.out.println("Try another direction!");
+        }
+    }
+    private void updateBiggest(int number){
+        if (number>biggest){
+            biggest = number;
         }
     }
 
@@ -202,6 +230,7 @@ public class Board {
             stringBuilder.replace(stringBuilder.length()-3, stringBuilder.length(), "");
             stringBuilder.append("\n");
         }
-        System.out.println(stringBuilder);
+        System.out.print(stringBuilder);
+        System.out.println("biggest = " + biggest);
     }
 }
